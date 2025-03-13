@@ -480,6 +480,11 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &193914078 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4023453338393064724, guid: eb5f49940821ec14488a8811488e0b04, type: 3}
+  m_PrefabInstance: {fileID: 8514878461357615949}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &474173353
 GameObject:
   m_ObjectHideFlags: 0
@@ -773,6 +778,18 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6677248666390085779, guid: eb5f49940821ec14488a8811488e0b04, type: 3}
   m_PrefabInstance: {fileID: 8514878461357615949}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &851667185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193914078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1059fe67847f4bbbaa04281ca0f43aaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &856354480
 GameObject:
   m_ObjectHideFlags: 0
@@ -1401,6 +1418,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29dbbbcb4120491fa05436fda493b44c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weatherButton: {fileID: 0}
+  dogsButton: {fileID: 0}
 --- !u!1 &1145851624
 GameObject:
   m_ObjectHideFlags: 0
@@ -2683,7 +2702,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4023453338393064724, guid: eb5f49940821ec14488a8811488e0b04, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 851667185}
   m_SourcePrefab: {fileID: 100100000, guid: eb5f49940821ec14488a8811488e0b04, type: 3}
 --- !u!1001 &9072082719238188076
 PrefabInstance:
