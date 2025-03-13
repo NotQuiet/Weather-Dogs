@@ -9,11 +9,11 @@ namespace Zenject.Installers
 {
     public class GameInstaller : MonoInstaller
     {
-        [SerializeField] private List<ViewBase> views;
-
         public override void InstallBindings()
         {
             Container.Bind<EventBus>().AsSingle().NonLazy();
+            
+            ViewBase[] views = FindObjectsByType<ViewBase>((FindObjectsSortMode)FindObjectsInactive.Include);
             
             Debug.Log("Starting binding process for views...");
 
