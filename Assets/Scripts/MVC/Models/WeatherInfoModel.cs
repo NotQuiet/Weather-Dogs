@@ -51,7 +51,7 @@ namespace MVC.Models
             return null;
         }
     }
-    
+
     [Serializable]
     public class WeatherResponse
     {

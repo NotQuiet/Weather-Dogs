@@ -21,7 +21,6 @@ namespace MVC.Controllers
             base.Init(bus);
 
             bus.OnWeatherClicked.Subscribe(_ => { OnWeatherButtonClicked(); }).AddTo(Disposable);
-            bus.OnDogsClicked.Subscribe(_ => { OnDogsButtonClicked(); }).AddTo(Disposable);
 
             Model.Temperature.Subscribe(s => { SetWeather.Execute(s); }).AddTo(Disposable);
         }
@@ -31,8 +30,5 @@ namespace MVC.Controllers
             Model.GetWeather();
         }
 
-        private void OnDogsButtonClicked()
-        {
-        }
     }
 }
