@@ -480,11 +480,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!1 &193914078 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4023453338393064724, guid: eb5f49940821ec14488a8811488e0b04, type: 3}
-  m_PrefabInstance: {fileID: 8514878461357615949}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &474173353
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,6 +693,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &661041065 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4023453338393064724, guid: eb5f49940821ec14488a8811488e0b04, type: 3}
+  m_PrefabInstance: {fileID: 1676249170}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &729724590
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,13 +778,12 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6677248666390085779, guid: eb5f49940821ec14488a8811488e0b04, type: 3}
   m_PrefabInstance: {fileID: 8514878461357615949}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &851667185
+--- !u!114 &851667185 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 317935661092375941, guid: eb5f49940821ec14488a8811488e0b04, type: 3}
+  m_PrefabInstance: {fileID: 8514878461357615949}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 193914078}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1059fe67847f4bbbaa04281ca0f43aaa, type: 3}
@@ -1418,8 +1417,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29dbbbcb4120491fa05436fda493b44c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weatherButton: {fileID: 0}
-  dogsButton: {fileID: 0}
+  weatherButton: {fileID: 851667185}
+  dogsButton: {fileID: 1676249175}
 --- !u!1 &1145851624
 GameObject:
   m_ObjectHideFlags: 0
@@ -2307,7 +2306,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4023453338393064724, guid: eb5f49940821ec14488a8811488e0b04, type: 3}
       propertyPath: m_Name
-      value: MenuButton (1)
+      value: DogsButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967779250247211130, guid: eb5f49940821ec14488a8811488e0b04, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6677248666390085779, guid: eb5f49940821ec14488a8811488e0b04, type: 3}
       propertyPath: m_Pivot.x
@@ -2389,16 +2392,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4967779250247211130, guid: eb5f49940821ec14488a8811488e0b04, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4023453338393064724, guid: eb5f49940821ec14488a8811488e0b04, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1676249175}
   m_SourcePrefab: {fileID: 100100000, guid: eb5f49940821ec14488a8811488e0b04, type: 3}
 --- !u!224 &1676249171 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6677248666390085779, guid: eb5f49940821ec14488a8811488e0b04, type: 3}
   m_PrefabInstance: {fileID: 1676249170}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1676249175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661041065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1059fe67847f4bbbaa04281ca0f43aaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1732922458
 GameObject:
   m_ObjectHideFlags: 0
@@ -2617,7 +2636,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4023453338393064724, guid: eb5f49940821ec14488a8811488e0b04, type: 3}
       propertyPath: m_Name
-      value: MenuButton
+      value: WeatherButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4967779250247211130, guid: eb5f49940821ec14488a8811488e0b04, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6677248666390085779, guid: eb5f49940821ec14488a8811488e0b04, type: 3}
       propertyPath: m_Pivot.x
@@ -2702,10 +2725,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4023453338393064724, guid: eb5f49940821ec14488a8811488e0b04, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 851667185}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb5f49940821ec14488a8811488e0b04, type: 3}
 --- !u!1001 &9072082719238188076
 PrefabInstance:

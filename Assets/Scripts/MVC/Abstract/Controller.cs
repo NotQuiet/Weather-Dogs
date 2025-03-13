@@ -1,3 +1,4 @@
+using Custom;
 using UnityEngine;
 
 namespace MVC.Abstract
@@ -6,6 +7,13 @@ namespace MVC.Abstract
     {
         public TM Model;
         public TV View;
+
+        private EventBus _eventBus;
+        
+        public virtual void Init(EventBus bus)
+        {
+            _eventBus = bus;
+        }
 
         public Controller(TM model, TV view)
         {

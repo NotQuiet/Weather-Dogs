@@ -14,7 +14,11 @@ namespace MVC.Views
 
         public override void OnInitialized()
         {
+            Controller.Init(EventBus);
 
+            weatherButton.OnClick.Subscribe(_ => { EventBus.OnWeatherClicked.Execute(); }).AddTo(Controller.Disposable);
+
+            dogsButton.OnClick.Subscribe(_ => { EventBus.OnDogsClicked.Execute(); }).AddTo(Controller.Disposable);
         }
     }
 }

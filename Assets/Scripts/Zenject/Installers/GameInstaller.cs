@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Custom;
 using MVC.Abstract;
+using MVC.Models;
 using UnityEngine;
 
 namespace Zenject.Installers
@@ -11,6 +13,8 @@ namespace Zenject.Installers
 
         public override void InstallBindings()
         {
+            Container.Bind<EventBus>().AsSingle().NonLazy();
+            
             Debug.Log("Starting binding process for views...");
 
             foreach (var view in views)
