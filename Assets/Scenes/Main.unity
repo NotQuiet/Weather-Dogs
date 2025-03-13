@@ -800,6 +800,7 @@ GameObject:
   - component: {fileID: 856354481}
   - component: {fileID: 856354482}
   - component: {fileID: 856354483}
+  - component: {fileID: 856354484}
   m_Layer: 0
   m_Name: Weather
   m_TagString: Untagged
@@ -855,6 +856,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding: {x: 0, y: 0, z: 0, w: 0}
   m_Softness: {x: 0, y: 0}
+--- !u!114 &856354484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856354480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e66458c189e4e5eb4019b8d87cb5f2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 856354482}
 --- !u!1 &881066416
 GameObject:
   m_ObjectHideFlags: 0
@@ -1685,6 +1699,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   views:
   - {fileID: 1135266813}
+  - {fileID: 856354484}
+  - {fileID: 1732922462}
 --- !u!1 &1436306016
 GameObject:
   m_ObjectHideFlags: 0
@@ -2429,6 +2445,7 @@ GameObject:
   - component: {fileID: 1732922459}
   - component: {fileID: 1732922460}
   - component: {fileID: 1732922461}
+  - component: {fileID: 1732922462}
   m_Layer: 0
   m_Name: Dogs
   m_TagString: Untagged
@@ -2483,6 +2500,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding: {x: 0, y: 0, z: 0, w: 0}
   m_Softness: {x: 0, y: 0}
+--- !u!114 &1732922462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732922458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69e0732ad5d245b8a6da58bd854c3f6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 1732922460}
 --- !u!1 &1901458117
 GameObject:
   m_ObjectHideFlags: 0

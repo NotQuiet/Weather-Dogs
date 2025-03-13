@@ -7,5 +7,11 @@ namespace MVC.Abstract
     {
         [Inject] protected TC Controller;
         [Inject] protected EventBus EventBus;
+
+        [Inject]
+        public virtual void OnInitialized()
+        {
+            Controller.Init(EventBus);
+        } 
     }
 }
