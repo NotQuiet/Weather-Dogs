@@ -472,7 +472,7 @@ MonoBehaviour:
     m_Top: 20
     m_Bottom: 50
   m_ChildAlignment: 1
-  m_Spacing: 50
+  m_Spacing: 140
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -492,6 +492,7 @@ GameObject:
   - component: {fileID: 474173356}
   - component: {fileID: 474173355}
   - component: {fileID: 474173357}
+  - component: {fileID: 474173358}
   m_Layer: 0
   m_Name: DogPopUpMain
   m_TagString: Untagged
@@ -569,6 +570,22 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &474173358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474173353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6012c4fff23241cfae1d63328a2ae40b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  titleText: {fileID: 914687233}
+  descriptionText: {fileID: 1543609501}
+  okButton: {fileID: 892512445}
+  canvasGroup: {fileID: 474173357}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,6 +1015,7 @@ GameObject:
   - component: {fileID: 892512442}
   - component: {fileID: 892512444}
   - component: {fileID: 892512443}
+  - component: {fileID: 892512445}
   m_Layer: 0
   m_Name: OkButton
   m_TagString: Untagged
@@ -1063,6 +1081,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 892512441}
   m_CullTransparentMesh: 1
+--- !u!114 &892512445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892512441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1059fe67847f4bbbaa04281ca0f43aaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &914687231
 GameObject:
   m_ObjectHideFlags: 0
@@ -1147,12 +1177,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 80
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 80
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
@@ -2114,12 +2144,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
+  m_fontSize: 50
   m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 50
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
@@ -2796,5 +2826,5 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 1016350212}
   - {fileID: 1415057507}
-  - {fileID: 1223153002}
   - {fileID: 1145851626}
+  - {fileID: 1223153002}

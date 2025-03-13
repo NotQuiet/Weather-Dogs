@@ -16,12 +16,12 @@ namespace Custom
         
         public ReactiveCommand<DogItemDto> NeedToShowDog { get; } = new();
 
-        public void Init(DogItemDto thisDog)
+        public void Init(DogItemDto thisDog, int num)
         {
             _thisDog = thisDog;
             _disposable.Clear();
 
-            SetInfo();
+            SetInfo(num);
 
             customButton.OnClick.Subscribe(_ =>
             {
@@ -29,10 +29,10 @@ namespace Custom
             }).AddTo(_disposable);
         }
 
-        private void SetInfo()
+        private void SetInfo(int num)
         {
             dogName.text = _thisDog.name;
-            number.text = _thisDog.id.ToString();
+            number.text = num.ToString();
         }
     }
 }

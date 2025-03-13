@@ -1,4 +1,5 @@
 using Custom;
+using UniRx;
 using UnityEngine;
 
 namespace MVC.Abstract
@@ -9,7 +10,8 @@ namespace MVC.Abstract
         public TV View;
 
         private EventBus _eventBus;
-        
+        public CompositeDisposable Disposable { get; } = new();
+
         public virtual void Init(EventBus bus)
         {
             _eventBus = bus;
