@@ -1,9 +1,9 @@
-using UnityEngine;
+using Zenject;
 
 namespace MVC.Abstract
 {
-    public class View<T> : MonoBehaviour where T is Controller
+    public class View<TM, TV> : ViewBase where TM : Model where TV : ViewBase
     {
-        
+        [Inject] protected Controller<TM, TV> Controller;
     }
 }
