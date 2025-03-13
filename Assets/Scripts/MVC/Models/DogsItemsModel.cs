@@ -24,7 +24,7 @@ namespace MVC.Models
         private async UniTask<List<DogItemDto>> GetBreeds()
         {
             using UnityWebRequest request = UnityWebRequest.Get(URL);
-            request.SetRequestHeader("x-api-key", "your-api-key-here"); // Если нужен API ключ
+            // request.SetRequestHeader("x-api-key", "your-api-key-here");
 
             await request.SendWebRequest().ToUniTask();
 
@@ -33,13 +33,9 @@ namespace MVC.Models
                 string json = request.downloadHandler.text;
                 try
                 {
-                    Debug.Log($"Собачки: {json}");
-
-                    // Парсим JSON
                     DogItemDto[] dogsArray = JsonUtility.FromJson<DogItemsWrapper>($"{{\"dogs\":{json}}}").dogs;
                     List<DogItemDto> dogsList = new List<DogItemDto>(dogsArray);
 
-                    Debug.Log($"Полученные породы собак: {dogsList.Count}");
                     return dogsList;
                 }
                 catch (Exception ex)

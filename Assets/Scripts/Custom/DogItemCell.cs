@@ -1,26 +1,37 @@
 using MVC.Models;
 using TMPro;
+using UniRx;
 using UnityEngine;
 
 namespace Custom
 {
     public class DogItemCell : MonoBehaviour
     {
+        [SerializeField] private CustomButton customButton;
         [SerializeField] private TextMeshProUGUI number;
-        [SerializeField] private TextMeshProUGUI name;
-
+        [SerializeField] private TextMeshProUGUI dogName;
+        
+        private CompositeDisposable _disposable = new();
         private DogItemDto _thisDog;
+        
+        public ReactiveCommand<DogItemDto> NeedToShowDog { get; } = new();
 
         public void Init(DogItemDto thisDog)
         {
             _thisDog = thisDog;
-            
+            _disposable.Clear();
+
             SetInfo();
+
+            customButton.OnClick.Subscribe(_ =>
+            {
+                NeedToShowDog.Execute(_thisDog);
+            }).AddTo(_disposable);
         }
 
         private void SetInfo()
         {
-            name.text = _thisDog.name;
+            dogName.text = _thisDog.name;
             number.text = _thisDog.id.ToString();
         }
     }

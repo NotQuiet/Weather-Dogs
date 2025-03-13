@@ -20,6 +20,12 @@ namespace MVC.Views
             {
                 var dogObj = Instantiate(dogItemCellPrefab, content);
                 dogObj.Init(dog);
+
+                dogObj.NeedToShowDog.Subscribe(dto =>
+                {
+                    Debug.Log($"Show dog {dto.name}");
+                    EventBus.ShowDog.Execute(dto);
+                }).AddTo(Controller.Disposable);
             }
         }
         

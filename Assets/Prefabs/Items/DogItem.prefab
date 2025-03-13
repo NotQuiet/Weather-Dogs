@@ -48,6 +48,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3237835540058526841}
   - component: {fileID: 7901763146831228659}
+  - component: {fileID: 8925663919085847699}
   m_Layer: 0
   m_Name: DogItem
   m_TagString: Untagged
@@ -88,8 +89,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40313b9953fc4d39b72f15e1a185e09a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  customButton: {fileID: 8925663919085847699}
   number: {fileID: 2722776356160509277}
-  name: {fileID: 8852523945850367249}
+  dogName: {fileID: 8852523945850367249}
+--- !u!114 &8925663919085847699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234846465585134102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1059fe67847f4bbbaa04281ca0f43aaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2242894733161594110
 GameObject:
   m_ObjectHideFlags: 0

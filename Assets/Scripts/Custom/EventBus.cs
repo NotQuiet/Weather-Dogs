@@ -1,3 +1,4 @@
+using MVC.Models;
 using UniRx;
 using Zenject;
 
@@ -7,5 +8,6 @@ namespace Custom
     {
         public ReactiveCommand OnWeatherClicked { get; } = new();
         public ReactiveCommand OnDogsClicked { get; } = new();
+        public ReactiveCommand<DogItemDto> ShowDog { get; } = new();
     }
 }
