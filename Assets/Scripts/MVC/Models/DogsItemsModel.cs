@@ -1,67 +1,76 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
+using Custom;
 using MVC.Abstract;
 using UniRx;
 using UnityEngine;
-using UnityEngine.Networking;
+using Zenject;
 
 namespace MVC.Models
 {
     public class DogsItemsModel : Model
     {
+        [Inject] private WebRequestService _webRequestService;
+
         private const string URL = "https://dogapi.dog/api/v2/breeds";
 
+        private ConcurrentQueue<string> _requests = new();
+        
         public ReactiveCommand<List<DogItemDto>> DogList = new();
 
-        public async void GetDogs()
+        public void GetDogs()
         {
-            var dogs = await GetBreeds();
-            if (dogs != null)
+            GetBreeds();
+        }
+
+        public void CancelRequests()
+        {
+            foreach (var _ in _requests)
             {
-                DogList.Execute(dogs);
+                _requests.TryDequeue(out string id);
+                _webRequestService.CancelRequest(id);
             }
         }
 
-        private async UniTask<List<DogItemDto>> GetBreeds()
+        private void GetBreeds()
         {
-            using UnityWebRequest request = UnityWebRequest.Get(URL);
-            await request.SendWebRequest().ToUniTask();
+            var requestId = _webRequestService.EnqueueRequest(URL, OnSuccess, OnError);
+            _requests.Enqueue(requestId);
+        }
 
-            if (request.result == UnityWebRequest.Result.Success)
+        private void OnSuccess(WebRequestDto responseJson)
+        {
+            try
             {
-                string json = request.downloadHandler.text;
-                try
-                {
-                    DogApiResponse response = JsonUtility.FromJson<DogApiResponse>($"{{\"wrapper\":{json}}}");
-                    List<DogItemDto> dogsList = new List<DogItemDto>();
+                _requests.TryDequeue(out _);
+                
+                DogApiResponse response = JsonUtility.FromJson<DogApiResponse>($"{{\"wrapper\":{responseJson.Response}}}");
+                List<DogItemDto> dogsList = new List<DogItemDto>();
 
-                    foreach (var dog in response.wrapper.data)
+                foreach (var dog in response.wrapper.data)
+                {
+                    dogsList.Add(new DogItemDto
                     {
-                        dogsList.Add(new DogItemDto
-                        {
-                            id = dog.id,
-                            name = dog.attributes.name
-                        });
-                    }
+                        id = dog.id,
+                        name = dog.attributes.name
+                    });
+                }
 
-                    return dogsList;
-                }
-                catch (Exception ex)
-                {
-                    Debug.LogError($"Ошибка парсинга JSON: {ex.Message}\nJSON: {json}");
-                }
+                DogList.Execute(dogsList);
             }
-            else
+            catch (Exception ex)
             {
-                Debug.LogError("Ошибка запроса: " + request.error);
+                Debug.LogError($"Ошибка парсинга JSON: {ex.Message}\nJSON: {responseJson}");
             }
+        }
 
-            return null;
+        private void OnError(WebRequestDto response)
+        {
+            Debug.LogError($"Error get breeds: {response}");
         }
     }
 
-    // Обертка для корректного парсинга JSON
     [Serializable]
     public class DogApiResponse
     {
@@ -77,7 +86,7 @@ namespace MVC.Models
     [Serializable]
     public class DogApiItem
     {
-        public string id; // ID - это строка в формате GUID
+        public string id;
         public DogAttributes attributes;
     }
 
@@ -90,7 +99,7 @@ namespace MVC.Models
     [Serializable]
     public class DogItemDto
     {
-        public string id;  // ID теперь строка (GUID)
+        public string id;
         public string name;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace Custom
 {
-    public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+    public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerClickHandler
     {
         public ReactiveCommand OnClick { get; } = new();
 
@@ -16,7 +16,7 @@ namespace Custom
                 .Append(transform.DOScale(1f, 0.1f));
         }
 
-        public void OnPointerUp(PointerEventData eventData)
+        public void OnPointerClick(PointerEventData eventData)
         {
             OnClick.Execute();
         }

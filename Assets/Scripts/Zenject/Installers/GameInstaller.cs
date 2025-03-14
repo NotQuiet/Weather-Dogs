@@ -10,6 +10,7 @@ namespace Zenject.Installers
         public override void InstallBindings()
         {
             Container.Bind<EventBus>().AsSingle().NonLazy();
+            Container.Bind<WebRequestService>().AsSingle().NonLazy();
             
             ViewBase[] views = FindObjectsByType<ViewBase>((FindObjectsSortMode)FindObjectsInactive.Include);
             

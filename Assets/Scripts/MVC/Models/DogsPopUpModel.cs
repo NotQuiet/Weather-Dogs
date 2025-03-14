@@ -4,6 +4,7 @@ using MVC.Abstract;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Networking;
+using Zenject;
 
 namespace MVC.Models
 {
@@ -12,7 +13,7 @@ namespace MVC.Models
         private const string BASE_URL = "https://dogapi.dog/api/v2/breeds";
 
         public ReactiveCommand<string> DogDescription = new();
-
+        
         public async void GetDog(string id)
         {
             string description = await GetBreedDescription(id);
