@@ -14,7 +14,7 @@ namespace MVC.Controllers
         {
         }
 
-        private CancellationTokenSource _cancellationTokenSource = new();
+        private CancellationTokenSource _cancellationTokenSource;
 
         public CompositeDisposable Disposable { get; } = new();
         public ReactiveCommand<string> SetWeather { get; } = new();
@@ -38,6 +38,8 @@ namespace MVC.Controllers
         {
             if (_loopIsActive)
                 return;
+            
+            _cancellationTokenSource = new CancellationTokenSource();
 
             GetWeatherLoop();
         }
@@ -53,14 +55,14 @@ namespace MVC.Controllers
             }
 
             _loopIsActive = false;
-            _cancellationTokenSource = new CancellationTokenSource();
         }
 
         private void CancelLoop()
         {
-            _cancellationTokenSource.Cancel();
             Model.CancelRequests();
-            _cancellationTokenSource = new CancellationTokenSource();
+            _loopIsActive = false;
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource.Dispose();
         }
     }
 }

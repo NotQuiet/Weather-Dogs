@@ -23,6 +23,7 @@ namespace MVC.Models
 
         public void GetWeather()
         {
+            Debug.Log("Get Weather");
             GetTemperature();
         }
 

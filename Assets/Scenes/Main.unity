@@ -1002,7 +1002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a760cafcc8f4d6586bf63628895fd15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dogItemCellPrefab: {fileID: 0}
+  dogCellFactory: {fileID: 2103434766}
   content: {fileID: 983863984}
 --- !u!1 &892512441
 GameObject:
