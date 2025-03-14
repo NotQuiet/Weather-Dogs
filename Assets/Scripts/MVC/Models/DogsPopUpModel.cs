@@ -69,36 +69,6 @@ namespace MVC.Models
 
             Debug.LogError($"Error get temperature: {response.Response}");
         }
-
-        // private async UniTask<string> GetBreedDescription(string id)
-        // {
-        //     string url = $"{BASE_URL}/{id}";
-        //
-        //     using UnityWebRequest request = UnityWebRequest.Get(url);
-        //     await request.SendWebRequest().ToUniTask();
-        //
-        //     if (request.result == UnityWebRequest.Result.Success)
-        //     {
-        //         string json = request.downloadHandler.text;
-        //         Debug.Log(json); // Выводим JSON для проверки
-        //
-        //         try
-        //         {
-        //             DogDescriptionResponse response = JsonUtility.FromJson<DogDescriptionResponse>(json);
-        //             return response.data.attributes.description;
-        //         }
-        //         catch (Exception ex)
-        //         {
-        //             Debug.LogError($"Ошибка парсинга JSON: {ex.Message}\nJSON: {json}");
-        //         }
-        //     }
-        //     else
-        //     {
-        //         Debug.LogError("Ошибка запроса: " + request.error);
-        //     }
-        //
-        //     return null;
-        // }
     }
 
     [Serializable]

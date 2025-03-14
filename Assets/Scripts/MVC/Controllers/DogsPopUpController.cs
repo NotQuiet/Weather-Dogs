@@ -32,8 +32,6 @@ namespace MVC.Controllers
 
         private void GetDogDescription(DogItemDto dto)
         {
-            Debug.Log("Show dog");
-            
             _cachedDogTitle = dto.name;
             
             Model.CancelLastRequest();

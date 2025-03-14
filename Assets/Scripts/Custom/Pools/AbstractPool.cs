@@ -12,6 +12,7 @@ namespace Custom.Pools
         private int _poolSize;
         private int _counter;
 
+        public T[] PoolArray => _pool.ToArray();
 
         public void SetPoolSize(int size)
         {

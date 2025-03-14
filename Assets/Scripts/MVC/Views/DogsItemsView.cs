@@ -18,6 +18,27 @@ namespace MVC.Views
 
         private AbstractPool<DogItemCell> _pool = new();
 
+        public override void OnInitialized()
+        {
+            base.OnInitialized();
+            SetPoolSize(10);
+
+            Controller.SetDogs.Subscribe(SetContent).AddTo(Controller.Disposable);
+
+            EventBus.OnDogDescriptionLoaded.Subscribe(OnDogDescriptionLoaded).AddTo(Controller.Disposable);
+        }
+
+        private void OnDogDescriptionLoaded(string title)
+        {
+            foreach (var dogCell in _pool.PoolArray)
+            {
+                if (dogCell.GetDog().name != title) continue;
+                
+                dogCell.StopRotateLoading();
+                break;
+            }
+        }
+
         private void SetContent(List<DogItemDto> dogs)
         {
             int num = 0;
@@ -29,22 +50,22 @@ namespace MVC.Views
 
                 dogObj.Init(dog, num);
 
-                dogObj.NeedToShowDog.Subscribe(dto =>
-                {
-                    Debug.Log($"Show dog {dto.name}");
-
-                    EventBus.ShowDog.Execute(dto);
-                }).AddTo(Controller.Disposable);
+                dogObj.NeedToShowDog.Subscribe(dto => { OnCellClicked(dto, dogObj); }).AddTo(Controller.Disposable);
             }
         }
 
-        public override void OnInitialized()
+        private void OnCellClicked(DogItemDto dogDto, DogItemCell cell)
         {
-            base.OnInitialized();
-            SetPoolSize(10);
+            foreach (var dogCell in _pool.PoolArray)
+            {
+                dogCell.StopRotateLoading();
+            }
 
-            Controller.SetDogs.Subscribe(SetContent).AddTo(Controller.Disposable);
+            cell.RotateLoading();
+
+            EventBus.ShowDog.Execute(dogDto);
         }
+
 
         private void SetPoolSize(int size)
         {

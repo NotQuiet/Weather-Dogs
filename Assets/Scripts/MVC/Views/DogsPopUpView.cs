@@ -33,10 +33,10 @@ namespace MVC.Views
         {
             titleText.text = valueTuple.title;
             descriptionText.text = valueTuple.description;
+
+            EventBus.OnDogDescriptionLoaded.Execute(valueTuple.title);
             
             ShowPopUp();
-            
-            Debug.Log($"SetDogDescription {valueTuple.title}: {valueTuple.description}");
         }
 
         private void ShowPopUp()

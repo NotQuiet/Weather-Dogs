@@ -11,5 +11,6 @@ namespace Custom
         public ReactiveCommand<DogItemDto> ShowDog { get; } = new();
         public ReactiveCommand OnStartLoading { get; } = new();
         public ReactiveCommand OnEndLoading { get; } = new();
+        public ReactiveCommand<string> OnDogDescriptionLoaded { get; } = new();
     }
 }
