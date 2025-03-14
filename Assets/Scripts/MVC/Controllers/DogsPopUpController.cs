@@ -35,6 +35,8 @@ namespace MVC.Controllers
             Debug.Log("Show dog");
             
             _cachedDogTitle = dto.name;
+            
+            Model.CancelLastRequest();
             Model.GetDog(dto.id);
         }
     }

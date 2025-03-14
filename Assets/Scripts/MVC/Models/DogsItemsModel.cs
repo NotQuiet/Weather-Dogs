@@ -16,7 +16,7 @@ namespace MVC.Models
         private const string URL = "https://dogapi.dog/api/v2/breeds";
 
         private ConcurrentQueue<string> _requests = new();
-        
+
         public ReactiveCommand<List<DogItemDto>> DogList = new();
 
         public void GetDogs()
@@ -44,8 +44,9 @@ namespace MVC.Models
             try
             {
                 _requests.TryDequeue(out _);
-                
-                DogApiResponse response = JsonUtility.FromJson<DogApiResponse>($"{{\"wrapper\":{responseJson.Response}}}");
+
+                DogApiResponse response =
+                    JsonUtility.FromJson<DogApiResponse>($"{{\"wrapper\":{responseJson.Response}}}");
                 List<DogItemDto> dogsList = new List<DogItemDto>();
 
                 foreach (var dog in response.wrapper.data)
@@ -61,13 +62,15 @@ namespace MVC.Models
             }
             catch (Exception ex)
             {
-                Debug.LogError($"Ошибка парсинга JSON: {ex.Message}\nJSON: {responseJson}");
+                Debug.LogError($"Ошибка парсинга JSON: {ex.Message}\nJSON: {responseJson.Response}");
             }
         }
 
         private void OnError(WebRequestDto response)
         {
-            Debug.LogError($"Error get breeds: {response}");
+            _requests.TryDequeue(out _);
+
+            Debug.LogError($"Error get breeds: {response.Response}");
         }
     }
 

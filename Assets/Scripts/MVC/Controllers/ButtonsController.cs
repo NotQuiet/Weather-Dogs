@@ -13,7 +13,6 @@ namespace MVC.Controllers
         {
         }
 
-        public CompositeDisposable Disposable { get; } = new();
 
         public override void Init(EventBus bus)
         {

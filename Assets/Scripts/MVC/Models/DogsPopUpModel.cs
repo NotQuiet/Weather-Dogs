@@ -1,55 +1,104 @@
 using System;
-using Cysharp.Threading.Tasks;
+using System.Collections.Concurrent;
+using Custom;
 using MVC.Abstract;
 using UniRx;
 using UnityEngine;
-using UnityEngine.Networking;
 using Zenject;
 
 namespace MVC.Models
 {
     public class DogsPopUpModel : Model
     {
+        [Inject] private WebRequestService _webRequestService;
+
         private const string BASE_URL = "https://dogapi.dog/api/v2/breeds";
 
+        private ConcurrentQueue<string> _requests = new();
+
         public ReactiveCommand<string> DogDescription = new();
-        
-        public async void GetDog(string id)
+
+        public void GetDog(string id)
         {
-            string description = await GetBreedDescription(id);
-            Debug.Log("On get dog Description: " + description);
-            DogDescription.Execute(description);
+            GetBreedDescription(id);
         }
 
-        private async UniTask<string> GetBreedDescription(string id)
+        public void CancelLastRequest()
+        {
+            if (_requests.TryDequeue(out string id))
+            {
+                _webRequestService.CancelRequest(id);
+            }
+        }
+
+        public void CancelRequests()
+        {
+            foreach (var _ in _requests)
+            {
+                _requests.TryDequeue(out string id);
+                _webRequestService.CancelRequest(id);
+            }
+        }
+
+        private void GetBreedDescription(string id)
         {
             string url = $"{BASE_URL}/{id}";
 
-            using UnityWebRequest request = UnityWebRequest.Get(url);
-            await request.SendWebRequest().ToUniTask();
-
-            if (request.result == UnityWebRequest.Result.Success)
-            {
-                string json = request.downloadHandler.text;
-                Debug.Log(json); // Выводим JSON для проверки
-
-                try
-                {
-                    DogDescriptionResponse response = JsonUtility.FromJson<DogDescriptionResponse>(json);
-                    return response.data.attributes.description;
-                }
-                catch (Exception ex)
-                {
-                    Debug.LogError($"Ошибка парсинга JSON: {ex.Message}\nJSON: {json}");
-                }
-            }
-            else
-            {
-                Debug.LogError("Ошибка запроса: " + request.error);
-            }
-
-            return null;
+            var requestId = _webRequestService.EnqueueRequest(url, OnSuccess, OnError);
+            _requests.Enqueue(requestId);
         }
+
+        private void OnSuccess(WebRequestDto responseJson)
+        {
+            _requests.TryDequeue(out _);
+
+            try
+            {
+                DogDescriptionResponse response = JsonUtility.FromJson<DogDescriptionResponse>(responseJson.Response);
+                DogDescription.Execute(response.data.attributes.description);
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError($"Ошибка парсинга JSON: {ex.Message}\nJSON: {responseJson.Response}");
+            }
+        }
+
+        private void OnError(WebRequestDto response)
+        {
+            _requests.TryDequeue(out _);
+
+            Debug.LogError($"Error get temperature: {response.Response}");
+        }
+
+        // private async UniTask<string> GetBreedDescription(string id)
+        // {
+        //     string url = $"{BASE_URL}/{id}";
+        //
+        //     using UnityWebRequest request = UnityWebRequest.Get(url);
+        //     await request.SendWebRequest().ToUniTask();
+        //
+        //     if (request.result == UnityWebRequest.Result.Success)
+        //     {
+        //         string json = request.downloadHandler.text;
+        //         Debug.Log(json); // Выводим JSON для проверки
+        //
+        //         try
+        //         {
+        //             DogDescriptionResponse response = JsonUtility.FromJson<DogDescriptionResponse>(json);
+        //             return response.data.attributes.description;
+        //         }
+        //         catch (Exception ex)
+        //         {
+        //             Debug.LogError($"Ошибка парсинга JSON: {ex.Message}\nJSON: {json}");
+        //         }
+        //     }
+        //     else
+        //     {
+        //         Debug.LogError("Ошибка запроса: " + request.error);
+        //     }
+        //
+        //     return null;
+        // }
     }
 
     [Serializable]

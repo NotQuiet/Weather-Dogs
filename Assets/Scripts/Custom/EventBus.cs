@@ -9,5 +9,7 @@ namespace Custom
         public ReactiveCommand OnWeatherClicked { get; } = new();
         public ReactiveCommand OnDogsClicked { get; } = new();
         public ReactiveCommand<DogItemDto> ShowDog { get; } = new();
+        public ReactiveCommand OnStartLoading { get; } = new();
+        public ReactiveCommand OnEndLoading { get; } = new();
     }
 }

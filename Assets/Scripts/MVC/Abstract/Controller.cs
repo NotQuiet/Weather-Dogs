@@ -9,12 +9,12 @@ namespace MVC.Abstract
         public TM Model;
         public TV View;
 
-        private EventBus _eventBus;
+        protected EventBus EventBus;
         public CompositeDisposable Disposable { get; } = new();
 
         public virtual void Init(EventBus bus)
         {
-            _eventBus = bus;
+            EventBus = bus;
         }
 
         public Controller(TM model, TV view)

@@ -13,7 +13,6 @@ namespace MVC.Controllers
         {
         }
 
-        public CompositeDisposable Disposable { get; } = new();
         public ReactiveCommand<List<DogItemDto>> SetDogs { get; } = new();
 
 

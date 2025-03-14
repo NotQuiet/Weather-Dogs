@@ -13,8 +13,6 @@ namespace MVC.Controllers
         {
         }
 
-        public CompositeDisposable Disposable { get; } = new();
-        
         public ReactiveCommand TurnOnWeather = new();
         public ReactiveCommand TurnOffWeather = new();
 

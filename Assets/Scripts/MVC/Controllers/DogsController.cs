@@ -12,7 +12,6 @@ namespace MVC.Controllers
         {
         }
 
-        public CompositeDisposable Disposable { get; } = new();
         
         public ReactiveCommand TurnOnDogs = new();
         public ReactiveCommand TurnOffDogs = new();

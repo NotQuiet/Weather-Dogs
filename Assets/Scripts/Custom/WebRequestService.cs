@@ -3,11 +3,14 @@ using System.Collections.Concurrent;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine.Networking;
+using Zenject;
 
 namespace Custom
 {
     public class WebRequestService : IDisposable
     {
+        [Inject] private EventBus _eventBus;
+        
         private readonly ConcurrentQueue<WebRequestItem> _requestQueue;
         private readonly ConcurrentDictionary<string, CancellationTokenSource> _requestTokens;
         private readonly CancellationTokenSource _serviceCancellationTokenSource;
@@ -115,6 +118,8 @@ namespace Custom
 
         private async UniTask<string> ProcessRequestAsync(WebRequestItem request)
         {
+            _eventBus.OnStartLoading.Execute();
+            
             var operation = request.WebRequest.SendWebRequest();
             await operation.ToUniTask(
                 Progress.Create<float>(_ => { }),
@@ -125,10 +130,12 @@ namespace Custom
 
             if (request.WebRequest.result == UnityWebRequest.Result.Success)
             {
+                _eventBus.OnEndLoading.Execute();
                 return request.WebRequest.downloadHandler.text;
             }
             else
             {
+                _eventBus.OnEndLoading.Execute();
                 throw new Exception($"Web request failed: {request.WebRequest.error}");
             }
         }
