@@ -45,11 +45,10 @@ namespace MVC.Models
             {
                 _requests.TryDequeue(out _);
 
-                DogApiResponse response =
-                    JsonUtility.FromJson<DogApiResponse>($"{{\"wrapper\":{responseJson.Response}}}");
+                DogApiResponse response = JsonUtility.FromJson<DogApiResponse>(responseJson.Response);
                 List<DogItemDto> dogsList = new List<DogItemDto>();
 
-                foreach (var dog in response.wrapper.data)
+                foreach (var dog in response.data)
                 {
                     dogsList.Add(new DogItemDto
                     {
@@ -76,12 +75,6 @@ namespace MVC.Models
 
     [Serializable]
     public class DogApiResponse
-    {
-        public DogItemsWrapper wrapper;
-    }
-
-    [Serializable]
-    public class DogItemsWrapper
     {
         public DogApiItem[] data;
     }
